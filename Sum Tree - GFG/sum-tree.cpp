@@ -110,7 +110,7 @@ class Solution
     {
         f=1;
         solve(root);
-        return f;
+        return f;         // 0 -> for false, 1 for true;
     }
 };
 

@@ -105,47 +105,22 @@ struct Node
 class Solution {
   public:
   
- //convert to sum tree
-int toSumTree(Node *node){ 
-	if(!node) //base case 
-		return 0;
-	
-	//store old value
-	int temp=node->data; 
-	
-	//update to new value
-	node->data=toSumTree(node->left)+toSumTree(node->right); 
-	
-	//return for upper level sums
-	return node->data+temp; 
-}
-
-// https://www.includehelp.com/icp/transform-to-sum-tree.aspx
-//printing the tree using level order traversal
-void printTree(Node* root){
-	queue<Node*> q;  // using stl
-	Node* temp;
-	q.push(root);
-	q.push(NULL);
-	cout<<"root\n";
-	while(!q.empty()){
-		temp=q.front();
-		q.pop();
-		if(temp==NULL){
-			if(!q.empty()){
-				cout<<"\nnext level\n";
-				q.push(NULL);
-			}
-		}
-		else{
-			cout<<temp->data<<" ";  //print node
-			if(temp->left)
-				q.push(temp->left); //EnQueue
-			if(temp->right)
-				q.push(temp->right); //EnQueue
-		}
-	}
-}
+    // Convert a given tree to a tree where every node contains sum of values of
+    // nodes in left and right subtrees in the original tree
+    int solve(Node* root){
+        if(!root) return 0;
+        
+        int a=solve(root->left);   // Finding left subtree length
+        int b=solve(root->right);  // Finding right subtree length
+        int x=root->data;          // Current node length
+        root->data = a+b;          // current node updated
+        
+        return a+b+x;             // Update to the previous node
+    }
+    void toSumTree(Node *node)
+    {
+        solve(node);
+    }
 };
 
 //{ Driver Code Starts.

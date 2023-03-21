@@ -120,7 +120,7 @@ int toSumTree(Node *node){
 	return node->data+temp; 
 }
 
-
+// https://www.includehelp.com/icp/transform-to-sum-tree.aspx
 //printing the tree using level order traversal
 void printTree(Node* root){
 	queue<Node*> q;  // using stl

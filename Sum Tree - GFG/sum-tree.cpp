@@ -100,9 +100,9 @@ class Solution
       if(!root) return 0; // now no more stack is created.
       if(!root-> left and !root->right) return root->data; // Case of leaf node
       if(f==0) return 0; // no more stack frame is created again
-      int a = solve(root->left);
-      int b = solve(root->right);
-      if(a+b != root->data) f=0;
+      int a = solve(root->left); // left Subtree
+      int b = solve(root->right); // Right Subtree
+      if(a+b != root->data) f=0; // Not equals to root node
       return a + b + root->data;
       
     }

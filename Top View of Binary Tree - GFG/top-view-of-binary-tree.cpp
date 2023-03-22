@@ -105,26 +105,27 @@ class Solution
     vector<int> topView(Node *root)
     {
         vector<int>ans;
-		if(root == NULL) return ans;
+		if(!root) return ans;
 		map<int, int>mp; // level position, node val
+		queue<pair<Node*, int>>q; // Node , Level
 		
-		queue<pair<Node*, int>>Q; // Node , Level
-		Q.push({root, 0});
+		// levels => -2 -1 0 1 2
+		q.push({root, 0});
 		
-		while(!Q.empty()){
-			auto it = Q.front();
-			Q.pop();
-			Node* node = it.first;
-			int level = it.second;
+		while(!q.empty()){
+			Node* t = q.front().first;
+			int level = q.front().second;
+			q.pop();
 			
-			if(mp.find(level)== mp.end()) mp[level] = node->data;
-			if(node->left != NULL) Q.push({node->left, level-1});
-			if(node->right != NULL) Q.push({node->right, level+1});
+			if(!mp[level]) mp[level] = t->data; // First elem in particular level of vertical order
+			
+			if(t->left) q.push({t->left, level-1}); // level before root is level-1
+			if(t->right) q.push({t->right, level+1}); // level after root is level+1
 		}
 		
-		for(auto x:mp){
-			ans.push_back(x.second);
-		}
+		for(auto x:mp)
+			ans.push_back(x.second);       // All the nodes
+		
 		return ans;
     }
 

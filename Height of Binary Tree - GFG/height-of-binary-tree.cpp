@@ -99,30 +99,12 @@ struct Node
 class Solution{
     public:
     //Function to find the height of a binary tree.
-    int height(struct Node* node){
-        queue<Node* >q;
-        int depth=0;
-        
-        q.push(node);
-        q.push(NULL);
-        
-        while(!q.empty()){
-            Node* node = q.front();
-            q.pop();
-            
-            if(node==NULL) depth++;
-            
-            if(node != NULL){
-                if(node -> left) q.push(node->left);
-                if(node -> right) q.push(node->right);
-            }
-            else if(!q.empty()){
-                q.push(NULL);
-            }
-            
-        }
-        
-        return depth;
+    int height(struct Node* root){
+       if(!root) return 0;
+       int x = height(root->left);
+       int y = height(root->right);
+       
+       return (max(x,y)+1);    // Only one case is handlei.e root one maximum of lef and right plus one root.
     }
 };
 

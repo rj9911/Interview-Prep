@@ -40,27 +40,27 @@ struct Node
 class Solution
 {
     public:
+    // Taking last node of every level.
     //Function to return list containing elements of right view of binary tree.
     vector<int> rightView(Node *root)
     {
-      vector<int> result;
-       queue<Node* > q;
-       q.push(root);
-       if(root == NULL) return {};
-       while( !q.empty() ) {
-           int n = q.size();
-           while(n--) {
-               root = q.front();
-               q.pop();
-               
-               if(root->left)
-                    q.push(root->left);
-                if(root->right)
-                    q.push(root->right);
-           }
-           result.emplace_back(root->data);
-       }
-       return result;
+      vector<int> ans;
+      if(!root) return ans;
+      queue<Node* > q;
+      q.push(root);
+      
+      while(!q.empty()){
+          int sz=q.size();
+          Node *t;
+          while(sz--){
+              t = q.front();  // At last time, last node of the particular level will be stored in t
+              q.pop();
+              if(t->left) q.push(t->left);
+              if(t->right) q.push(t->right);
+          }
+          ans.push_back(t->data);  // last node of a particular level.
+      }
+      return ans;
     }
 };
 

@@ -97,7 +97,7 @@ class Solution {
         if(!root) return "$"; // 1-> 245 , 2-> 2$4$5$
         string s="";
         if(!root->right and !root->left){   //Leaf node
-            s ="$"+ to_string(root->data);      
+            s ="$"+ to_string(root->data);  // Differentiate each node values $ is added    
             return s;
         } 
         s = s + to_string(root->data); //2

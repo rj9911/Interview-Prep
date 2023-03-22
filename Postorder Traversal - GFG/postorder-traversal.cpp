@@ -123,6 +123,37 @@ struct Node
     struct Node* right;
 }; */
 
+// Iterative way to find inorder , preorder , postorder
+/*
+void solve(Node* root){
+    stack<pair<Node* , int>> s;  // (Node, value)
+    s.push({root,1});
+    string pre = "";
+    string in = "";
+    string post = "";
+    while(!s.empty()){
+        int state = s.top().second;
+        Node* node = s.top().first;
+        if(state==1){
+            pre += to_string(node->data);
+            s.top().second = state+1;
+            if(node->left) s.push({node->left, 1});
+        }else if(state == 2){
+            in += to_string(node->data);
+            s.top().second = state+1;
+            if(node->right) s.push({node->right,1});
+        }else{
+            post += to_string(node->data);
+            s.pop();
+        }
+    }
+    cout<<pre<<endl;
+    cout<<in<<endl;
+    cout<<post<<endl;
+}
+
+*/
+
 //Function to return a list containing the postorder traversal of the tree.
 void solve(Node* root, vector<int> &pre){
     if(root){

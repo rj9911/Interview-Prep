@@ -113,10 +113,10 @@ class Solution{
         vector<int> l = solve(root->left);
         vector<int> r = solve(root->right);
         if( l[0] and r[0] ){
-            if(root->data > l[3] and root->data < r[2]){ // maxElem of left sub
-                int x = l[2];
-                int y = r[3];
-                if(x == INT_MAX) x=root->data;
+            if(root->data > l[3] and root->data < r[2]){ // maxElem of left subtree and minElem of right subtree
+                int x = l[2];   // Min Elem
+                int y = r[3];   // Max Elem
+                if(x == INT_MAX) x=root->data;   // If either side of node is not present
                 if(y == INT_MIN) y=root->data;
                 return {1, l[1]+r[1]+1 , x, y}; // size -> leftheight + rightheight + 1
             }
@@ -125,7 +125,7 @@ class Solution{
     }
     int largestBst(Node *root)
     {
-        vector<int> ans = solve(root);
+        vector<int> ans = solve(root); // Returns four values
         return ans[1]; // Return the max BST length
     }
 };

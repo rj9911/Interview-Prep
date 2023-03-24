@@ -94,6 +94,7 @@ struct Node {
 class Solution {
   public:
     // Return the Kth smallest element in the given BST
+    // Time -> O(k) and Space -> O(h)  -> h => O(logn)
     int ans;
     void solve(Node* root, int k, int &idx){
         if(!root) return;              

@@ -7,8 +7,11 @@ class Solution
 {
 public:
 	//Function to return list containing vertices in Topological order.
-    // BFS Based Solution
-
+    /* BFS Based Solution 
+     Finding inorder array
+     Make inorder 0 after removing the edges connected to it.
+     Push that vertice to queue.
+    */
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	 vector<int> in(V, 0);

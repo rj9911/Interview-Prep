@@ -15,11 +15,11 @@ public:
             int x = q.front();
             q.pop();
             int color = colorvector[x];
-            vector<int>v = adj[x];
+            vector<int>v = adj[x]; // Adjacency list
             
             for(int neighbour : v){
-                if(colorvector[neighbour]!=-1){
-                    if(colorvector[neighbour] == color) return false;
+                if(colorvector[neighbour]!=-1){ // coloured vertices
+                    if(colorvector[neighbour] == color) return false; // if parent and neighbour got same color then false
                 }else // uncoloured
                 {
                     colorvector[neighbour] = (color==0)?1:0;
@@ -31,7 +31,7 @@ public:
     }
 	bool isBipartite(int V, vector<int>adj[]){
 	   vector<int> colorvector(V,-1);
-	   for(int i=0;i<V;i++){
+	   for(int i=0;i<V;i++){    // Done to make call on every vertices as graph is not connected
 	       if(colorvector[i] == -1){
 	           if(checkbipartite(V , adj , i, colorvector) == false) return false;
 	       }

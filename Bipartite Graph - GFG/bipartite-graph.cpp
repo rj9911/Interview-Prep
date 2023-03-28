@@ -5,39 +5,38 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-   // BFS based Approach using of queue and simply painting the nodes and checking of two adjacent
+   // DFS based Approach using of queue and simply painting the nodes and checking of two adjacent
    // nodes are not of same colour.
-    bool checkbipartite(int V, vector<int> adj[], int src,  vector<int> &colorvector){
-        queue<int> q;
-        q.push(src);
-        colorvector[src] = 0;
-        while(!q.empty()){
-            int x = q.front();
-            q.pop();
-            int color = colorvector[x];
-            vector<int>v = adj[x]; // Adjacency list
+   bool checkbipartite(int V, vector<int> adj[], int src, vector<int> &colorvector, bool flag){
+    int color = colorvector[src];
+    vector<int>v = adj[src]; // Adjacency list
             
-            for(int neighbour : v){
-                if(colorvector[neighbour]!=-1){ // coloured vertices
-                    if(colorvector[neighbour] == color) return false; // if parent and neighbour got same color then false
-                }else // uncoloured
-                {
-                    colorvector[neighbour] = (color==0)?1:0;
-                    q.push(neighbour);
-                }
-            }
+    for(int neighbour : v){
+        if(colorvector[neighbour]!=-1){ // coloured vertices
+            if(colorvector[neighbour] == color){
+                flag= false;
+                return false;
+            } // if parent and neighbour got same color then false
+        }else{ // uncolured
+            colorvector[neighbour] = (color==0)?1:0;
+            if(!checkbipartite(V, adj, neighbour, colorvector, flag)) return false;
         }
-        return true;
     }
-	bool isBipartite(int V, vector<int>adj[]){
-	   vector<int> colorvector(V,-1);
-	   for(int i=0;i<V;i++){    // Done to make call on every vertices as graph is not connected
-	       if(colorvector[i] == -1){
-	           if(checkbipartite(V , adj , i, colorvector) == false) return false;
-	       }
-	   }
-	   return true;
-	}
+    return flag;
+}
+
+bool isBipartite(int V, vector<int>adj[]){
+    vector<int> colorvector(V,-1);
+     
+    for(int i=0;i<V;i++){    // Done to make call on every vertices as graph is not connected
+        if(colorvector[i] == -1){
+            colorvector[i] = 0;
+            bool flag = true;
+            if(!checkbipartite(V , adj , i, colorvector, flag)) return false;
+        }
+    }
+    return true;
+}
 
 };
 

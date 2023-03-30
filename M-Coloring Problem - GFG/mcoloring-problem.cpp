@@ -27,7 +27,7 @@ public:
                 
                 if(fnc(graph, m, V, i+1,color)) return true;
                 
-                color[i] = -1;
+                color[i] = -1; // Backtracks and check for another case of color
             }
         }
         return false;

@@ -28,7 +28,7 @@ class Solution {
     }
     
     /* int v,e;            // Making of Graph
-       cin>>v>>e;
+       cin>>v>>e;           // 1 based indexing works
        vector<int> g[v+1];
        for(int i=0;i<e;i++){
            int x,y;

@@ -9,6 +9,9 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+//By Reverse PostOrder Traversal
+
+//T->O(Number of Nodes) && S->O(Number of Nodes) [Worst ASS] \U0001f602
 class Solution {
 public:
     TreeNode* prev=NULL;

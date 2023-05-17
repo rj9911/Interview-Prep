@@ -10,19 +10,35 @@
  */
 class Solution {
 public:
-    int pairSum(ListNode* head) {
-        vector<int> v;
-        ListNode *temp=head;
-        
-        while(temp){
-            v.push_back(temp->val);
-            temp=temp->next;
+    ListNode *reverseLL(ListNode *head,ListNode *prev){
+       if(head==NULL) return prev;
+
+       ListNode *temp = head->next;
+       head->next=prev;
+       return reverseLL(temp,head);
+   } // Recursive way to reverse LL.
+   int pairSum(ListNode* head) {
+        //find the mid of the LL:
+        ListNode *slow = head;
+        ListNode *fast = head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        int mx=INT_MIN,n=v.size();
-        for(int i=0;i<n/2;i++){
-            mx = max(mx, v[i]+v[n-1-i]);
-        }
+       
+        //slow is my mid value:
+        ListNode *dummy = reverseLL(slow,NULL);
         
-        return mx;
+        ListNode *start = head;
+        int maxx = 0;
+        while(dummy!=NULL){
+            int val1 = start->val;
+            int val2 = dummy->val;
+            int total = val1+val2;
+            maxx = max(maxx,total);
+            start=start->next;
+            dummy=dummy->next;
+        }
+       return maxx;
     }
 };

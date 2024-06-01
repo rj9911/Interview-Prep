@@ -1,8 +1,8 @@
 class Solution {
 public:
-  static constexpr int MOD = 1e9 + 7;
 
 int sumSubarrayMins(vector<int>& arr) {  
+    int MOD = 1e9 + 7;
   stack<int> s;
 
   int n = arr.size();

@@ -2,40 +2,27 @@ class Solution {
 public:
     int longestPalindrome(string word1, string word2) {
         string word = word1 + word2;
-        int n = word.length();
-        int m = word1.length();
-        
-        int **dp = new int*[n];
-        for(int i = 0; i < n; i++)
-            dp[i] = new int[n];
-        
-        int ans = 0;
-        for(int i = 0; i < n; i++) 
+        int size1 = word1.size(), size2 = word2.size();
+        int size = word.size();
+        vector<vector<int>> dp(size + 1, vector<int>(size + 1, 0));
+        int result = 0;
+        for(int i = 1; i <= size; ++i) {
             dp[i][i] = 1;
-        for(int i = 0; i < n-1; i++) {
-            if(word[i] == word[i+1])
-                dp[i][i+1] = 2;
-            else 
-                dp[i][i+1] = 1;
-            if(i == m-1)
-                ans = dp[i][i+1] == 2 ? 2 : 0;
         }
-        
-        for(int l = 3; l <= n; l++) {
-            for(int i = 0; i < n-l+1; i++) {
-                int j = i + l - 1;
-                if(word[i] == word[j]) {
-                    dp[i][j] = 2 + dp[i+1][j-1];
-                    if(i < m && j >= m)
-                        ans = max(ans, dp[i][j]);
-                }
-                else {
-                    dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+        for(int i = size; i >= 1; --i) {
+            for(int j = i + 1; j <= size; ++j) {
+                if(word[i - 1] == word[j - 1]) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                    if(i <= size1 && j > size1) {
+                        result = max(result, dp[i][j]);
+                    } 
+                } else {
+                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
                 }
             }
         }
-        
-        return ans;
+        return result;   
     }
+
 
 };

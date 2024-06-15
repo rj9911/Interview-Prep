@@ -1,8 +1,7 @@
 class Solution {
 public:
     int minimumTime(vector<int>& a, vector<int>& b, int x) {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0); cout.tie(0); cerr.tie(0);
+        
         int n = a.size();
         int sum = accumulate(a.begin(), a.end(), 0);
         int add = accumulate(b.begin(), b.end(), 0);

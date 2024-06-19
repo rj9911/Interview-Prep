@@ -1,34 +1,30 @@
 class Solution {
 public:
-    int constrainedSubsetSum(vector<int>& nums, int k)
-    {
-        int n=nums.size();
-        int ans=-10000;
-        int dp[n+1];
+    int constrainedSubsetSum(vector<int>& nums, int k) {
         
-        dp[0]=nums[0];
-        for(int i=0;i<n;i++)
+        int n = nums.size();
+        int maxSum = nums[0];
+        deque<pair<int,int>> dp;
+        dp.push_back({0, nums[0]});
+
+        for(int i = 1; i < n; i++)
         {
-            dp[i]=nums[i];
-            ans=max(ans,dp[i]);
+            if(i - dp.front().first > k)
+                dp.pop_front();
+            
+            int current = nums[i];
+            if(dp.front().second > 0)
+                current += dp.front().second;
+            maxSum = max(current, maxSum);
+
+            while(!dp.empty() && dp.back().second < current)
+                dp.pop_back();
+
+            dp.push_back({i, current});
         }
-        priority_queue<pair<int,int>>pq;
-        pq.push(make_pair(nums[0],0));
-        for(int i=1;i<n;i++)
-        {
-            while(i-pq.top().second>k)
-            {
-                pq.pop();
-            }
-            dp[i]=max(dp[i],nums[i]+pq.top().first);
-            pq.push(make_pair(dp[i],i));
-            ans=max(ans,dp[i]);
-        }
-        return ans;
-        
-        
-        
-        
+
+        return maxSum;
     }
+
 
 };

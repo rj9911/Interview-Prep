@@ -42,5 +42,4 @@ public:
         }
         return min_replace;
     }
-
 };

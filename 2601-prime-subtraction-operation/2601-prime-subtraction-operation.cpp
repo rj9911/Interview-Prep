@@ -6,7 +6,6 @@ public:
         for(int i=2;i<1001;i++){
             if(v[i])primes.push_back(i);
             else continue;
-            // cout<<i<<"-";
             for(int j=i*i;j<1001;j+=i)v[j]=0;
         }
         for(int i=nums.size()-2;i>=0;i--){
@@ -25,7 +24,6 @@ public:
                     }
                 }
             }
-            // if(p!=-1)cout<<nums[i]<<"-"<<primes[p]<<"\n";
             if(p==-1)return 0;
             nums[i]-=primes[p];
         }

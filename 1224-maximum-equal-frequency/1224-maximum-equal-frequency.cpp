@@ -1,10 +1,10 @@
 class Solution {
 public:
-    #define ll long long
+ 
     int maxEqualFreq(vector<int>& nums) {
-        ll n=nums.size(),answer=INT_MIN,count=INT_MIN;
-        unordered_map<ll,ll>mp,freq;
-        for(ll i=0;i<n;i++){
+        long long n=nums.size(),answer=INT_MIN,count=INT_MIN;
+        unordered_map<long long,long long>mp,freq;
+        for(long long i=0;i<n;i++){
             mp[nums[i]]++;
             count=max(count,mp[nums[i]]);
             freq[mp[nums[i]]]++;

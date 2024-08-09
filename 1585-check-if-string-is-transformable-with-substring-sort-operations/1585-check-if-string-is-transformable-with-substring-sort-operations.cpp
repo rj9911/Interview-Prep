@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int ct1[10], ct2[10];
     bool isTransformable(string s, string t) {
+        int ct1[10], ct2[10];
         int n = s.size();
         queue<int> q[10];
         for (int i = 0; i < n; i++) {

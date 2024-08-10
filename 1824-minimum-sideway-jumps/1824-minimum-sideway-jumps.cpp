@@ -2,7 +2,7 @@ class Solution {
 public:
     int minSideJumps(vector<int> &obstacles){
             int n = obstacles.size();
-            vector<vector < int>> dp(n, vector<int> (3, 1e9));
+            vector<vector < int>> dp(n, vector<int> (3, INT_MAX));
             for (int i = 0; i <= 2; i++) dp[n - 1][i] = 0;
 
             for (int idx = n - 2; idx >= 0; idx--){
@@ -10,7 +10,7 @@ public:
                     if (obstacles[idx+1] != currLane +1) dp[idx][currLane] = dp[idx + 1][currLane];
                     else
                     {
-                        int mn = 1e9;
+                        int mn = INT_MAX;
                         for (int i = 0; i <= 2; i++){
                             if (i != currLane && obstacles[idx] != i + 1){
                                 mn = min(mn, 1 + dp[idx + 1][i]);

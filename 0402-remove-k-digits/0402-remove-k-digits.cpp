@@ -2,9 +2,6 @@ class Solution {
 public:
     string removeKdigits(string num, int k) {
 
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-        cout.tie(NULL);
 
         int n = num.size();                                               
         string ans = "";
